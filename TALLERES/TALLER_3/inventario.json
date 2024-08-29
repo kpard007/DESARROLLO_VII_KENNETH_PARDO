@@ -1,0 +1,11 @@
+
+[
+    {"nombre": "Laptop", "precio": 999.99, "cantidad": 10},
+    {"nombre": "Smartphone", "precio": 499.50, "cantidad": 15},
+    {"nombre": "Auriculares", "precio": 79.99, "cantidad": 30},
+    {"nombre": "Tableta", "precio": 299.99, "cantidad": 8},
+    {"nombre": "Abanico", "precio": 30.99, "cantidad": 4},
+    {"nombre": "Television", "precio": 499.99, "cantidad": 2},
+    {"nombre": "Lavadora", "precio": 350.50, "cantidad": 5}
+  ]
+         

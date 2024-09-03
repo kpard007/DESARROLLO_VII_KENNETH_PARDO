@@ -50,4 +50,5 @@ function mostrarDetallesLibro($libro) {
                 <p><h3>Descripción:</h3> {$libro['descripcion']}</p>
             </div>";
 }
+
 ?>

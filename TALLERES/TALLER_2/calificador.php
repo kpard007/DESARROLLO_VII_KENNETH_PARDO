@@ -1,5 +1,5 @@
 <?php
-$calificacion = 85; 
+$calificacion = 60; 
 
 if ($calificacion >= 90 && $calificacion <= 100) {
     $letra = "A";

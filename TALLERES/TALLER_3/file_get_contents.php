@@ -19,12 +19,13 @@ $contenidoPhp
 $url = "https://es.wikipedia.org/wiki/Navegador_en_modo_texto";
 $contenidoWeb = file_get_contents($url);
 echo "
+
 Contenido de $url:
 " . substr($contenidoWeb, 0, 500) . "...
 "; // Mostramos solo los primeros 500 caracteres
 
 // Extra: Manejo de errores al usar file_get_contents()
-$archivoInexistente = "ejemplo.txt";
+$archivoInexistente = "archivo_que_no_existe.txt";
 $contenido = @file_get_contents($archivoInexistente); // El @ suprime los warnings
 
 if ($contenido === false) {
@@ -38,4 +39,4 @@ $contenido
 ";
 }
 ?>
-      
+

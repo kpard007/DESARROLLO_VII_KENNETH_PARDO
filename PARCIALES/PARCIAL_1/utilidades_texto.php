@@ -1,22 +1,19 @@
 <?php
 
 function contar_palabras($texto){
-
+    return str_word_count($texto);
 }
 
 
 function contar_vocales($texto){
-
+    $texto = strtolower($texto);
+    $vocales = preg_match_all('/[aeiou]/', $texto);
+    return $vocales;
 }
 
 function invertir_palabras($texto){
-    
-}
-/*cd C:/laragon/www
-git init
-git add .
-git commit -m "Inicialización del proyecto DESARROLLO_VII"
-*/                      
-
-
+    $palabras = explode(' ', $texto);
+    $palabras_invertidas = array_reverse($palabras);
+    return implode(' ', $palabras_invertidas);
+}              
 ?>

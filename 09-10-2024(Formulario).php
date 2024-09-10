@@ -67,7 +67,7 @@
 
 </style>
     <title>Ejemplo de Formulario</title>
-</head>
+</head> 
 <body>
     <div class = "Formulario">
 

@@ -1,5 +1,9 @@
+
 <?php
+ require_once 'Prestable.php';
+
 class Libro {
+   
     public $titulo;
     public $autor;
     public $anioPublicacion;
@@ -38,10 +42,36 @@ class Libro {
         return "'{$this->titulo}' por {$this->autor}, publicado en {$this->anioPublicacion}";
     }
 
+
+    //funciones para prestable
+    private $disponible = true;
+
+    public function prestar() {
+        if ($this->disponible) {
+            $this->disponible = false;
+            return true;
+        }
+        return false;
+    }
+
+    public function devolver() {
+        $this->disponible = true;
+    }
+
+    public function estaDisponible() {
+        return $this->disponible;
+    }
 }
 
 // Ejemplo de uso
-$miLibro = new Libro("  El Quijote  ", "Miguel de Cervantes",1965);
-echo $miLibro -> obtenerInformacion();
-echo "<br>Título: " . $miLibro -> getTitulo();
+$libro = new Libro("Rayuela", "Julio Cortázar",1963);
+echo $libro -> obtenerInformacion();
+echo "<br> Disponible:" . ($libro ->estaDisponible() ? "Si" : "No");
+$libro -> prestar();
+echo "<br> Disponible despúes de prestar: " . ($libro -> estaDisponible() ? "Sí" : "No");
+$libro -> devolver();
+echo "<br> Disponible despúes de devolver " . ($libro -> estaDisponible() ? "Sí" : "No");
+?>
+
+
 

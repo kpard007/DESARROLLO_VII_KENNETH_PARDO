@@ -158,6 +158,7 @@ if ($tareas === null) {
                     <th><a href="index.php?action=sort&field=prioridad&direction=<?php echo $sortField == 'prioridad' && $sortDirection == 'ASC' ? 'DESC' : 'ASC'; ?>">Prioridad <?php echo $sortField == 'prioridad' ? ($sortDirection == 'ASC' ? '▲' : '▼') : ''; ?></a></th>
                     <th><a href="index.php?action=sort&field=tipo&direction=<?php echo $sortField == 'tipo' && $sortDirection == 'ASC' ? 'DESC' : 'ASC'; ?>">Tipo <?php echo $sortField == 'tipo' ? ($sortDirection == 'ASC' ? '▲' : '▼') : ''; ?></a></th>
                     <th><a href="index.php?action=sort&field=fechaCreacion&direction=<?php echo $sortField == 'fechaCreacion' && $sortDirection == 'ASC' ? 'DESC' : 'ASC'; ?>">Fecha Creación <?php echo $sortField == 'fechaCreacion' ? ($sortDirection == 'ASC' ? '▲' : '▼') : ''; ?></a></th>
+                    <th><a href="index.php?action=sort&field=obtenerDetallesEspecificos&direction=<?php echo $sortField == 'detallesEspecificos' && $sortDirection == 'ASC' ? 'DESC' : 'ASC'; ?>">Detalles Especificos <?php echo $sortField == 'obtenerDetallesEspecificos' ? ($sortDirection == 'ASC' ? '▲' : '▼') : ''; ?></a></th>
                     <th>Acciones</th>
                 </tr>
             </thead>

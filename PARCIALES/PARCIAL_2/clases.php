@@ -1,165 +1,91 @@
 <?php
-// Archivo: clases.php
 
-class Tarea
-{
+interface Detalles{
+    public function obtenerDetallesEspecificos(): string;
+
+}
+
+$archivo = json_decode('tareas.json', true);
+
+function leerTitulo ($archivo){
+    $contenido = file_get_contents($archivo);
+    return json_decode($contenido, true);
+}
+
+class EntradaUnaColumna extends Entrada{
+    public $titulo; 
+    public $descripcion;
+
+    
+
+    public function obtenerDetallesEspecificos(): string{
+        return "Entrada de una columna"; 
+    } 
+
+}
+
+class EntradaDosColumna extends Entrada{
+    public $titulo1;
+    public $descripcion1;
+    public $titulo2;
+    public $descripcion2;
+
+    public function obtenerDetallesEspecificos(): string{
+        return "Entrada de dos columnas ";
+    }
+
+}
+
+class EntradaTresColumna extends Entrada{
+    public $titulo1;
+    public $descripcion1; 
+    public $titulo2;
+    public $titulo3;
+    public $descripcion3;
+
+    public function obtenerDetallesEspecificos(): string{
+        return "Entrada de tres columnas";
+    }
+
+}
+
+abstract class Entrada implements Detalles{
     public $id;
+    public $fecha_creacion;
+    public $tipo;
     public $titulo;
     public $descripcion;
-    public $estado;
-    public $prioridad;
-    public $fechaCreacion;
-    public $tipo;
 
-    public function __construct($datos)
-    {
+    public function __construct($datos = []) {
         foreach ($datos as $key => $value) {
-            $this->$key = $value;
-        }
-    }
-
-    // Implementar estos getters
-
-    public function getEstado()
-    {
-        return  $this->estado;
-    }
-    public function getPrioridad()
-    {
-        return $this->prioridad;
-    }
-    // public function getEstado() { }
-    // public function getPrioridad() { }
-    public function getID_tarea($id){
-        return $this-> $id;
-    }
- 
-    public function getTitulo_tarea($titulo){
-        return $this ->$titulo;
-    }
- 
-    public function getDescrip_tarea($descripcion){
-        return $this-> $descripcion;
-    }
- 
-    public function getEstado_tarea($estado){
-        return $this->$estado;
-    }
- 
-    public function getPrioridad_tarea($prioridad){
-        return $this-> $prioridad;
-    }
- 
-    public function getFechaCreacion_tarea($fechaCreacion){
-        return $this-> $fechaCreacion;
-    }
- 
-    public function getTipo_tarea($tipo){
-        return $this-> $tipo;
-
-    }
-}
-
-class GestorTareas
-{
-    private $tareas = [];
-
-    public function cargarTareas()
-    {
-        $json = file_get_contents('tareas.json');
-        $data = json_decode($json, true);
-        foreach ($data as $tareaData) {
-            $tarea = new Tarea($tareaData);
-            $this->tareas[] = $tarea;
-        }
-
-        return $this->tareas;
-    }
-    public function agregarTarea($tarea)
-    {
-        array_push($this->tareas, $tarea);
-    }
-    public function  eliminarTarea($id)
-    {
-        unset($this->tareas[$id - 1]);
-    }
-    public function actualizarTarea($tarea) {}
-    public function actualizarEstadoTarea($id, $nuevoEstado)
-    {
-        foreach ($this->tareas as $key => $tarea) {
-            if ($nuevoEstado === $tarea['estado']) {
-                $this->tareas[$key] = $nuevoEstado;
+            if (property_exists($this, $key)) {
+                $this->$key = $value;
             }
         }
-        return $this->tareas;
     }
-    public function buscarTareasPorEstado($estado) {}
-    public function listarTareas($filtroEstado = '')
-    {
-        $array_return = array();
-        foreach ($this->tareas as $tarea) {
-            if ($filtroEstado === $tarea['estado']) {
-                array_push($array_return, $tarea);
+}
+
+class GestorBlog {
+    private $entradas = [];
+
+    public function cargarEntradas() {
+        if (file_exists('tareas.json')) {
+            $json = file_get_contents('blog.json');
+            $data = json_decode($json, true);
+            foreach ($data as $entradaData) {
+                $this->entradas[] = new Entrada($entradaData);
             }
         }
-        return $array_return;
-    }
-}
-
-// Implementar:
-// 1. La interfaz Detalle
-
-interface Detalle {
-    public function obtenerDetallesEspecificos(): string;
-}
-
-// 2. Modificar la clase Tarea para implementar la interfaz Detalle
-
-// 3. Las clases TareaDesarrollo, TareaDiseno y TareaTesting que hereden de Tarea
-
-class TareaDesarrollos extends Tarea implements Detalle {
-    private $lenguajeProgramacion;
-
-    public function __construct($lenguajeProgramacion) {
-        $this->lenguajeProgramacion = $lenguajeProgramacion;
     }
 
-    public function obtenerDetallesEspecificos(): string {
-        return "leguaje de programacion es: $this->lenguajeProgramacion";
-    }
-}
-
-class TareaDiseno extends Tarea implements Detalle {
-    private $herramientaDiseno;
-
-    public function __construct($herramientaDiseno) {
-        $this->herramientaDiseno = $herramientaDiseno;
+    public function guardarEntradas() {
+        $data = array_map(function($entrada) {
+            return get_object_vars($entrada);
+        }, $this->entradas);
+        file_put_contents('tareas.json', json_encode($data, JSON_PRETTY_PRINT));
     }
 
-
-    public function obtenerDetallesEspecificos(): string {
-        return "herramienta de diseno es: $this->herramientaDiseno";
+    public function obtenerEntradas() {
+        return $this->entradas;
     }
-}
-
-class TareaTesting extends Tarea implements Detalle {
-    private $tipoTest;
-
-    public function __construct($tipoTest) {
-        if (in_array($tipoTest, ['unitario', 'integracion', 'e2e'])) {
-            $this->tipoTest = $tipoTest;
-        } else {
-            throw new InvalidArgumentException("no es valido el tipo de test");
-        }
-    }
-
-    public function obtenerDetallesEspecificos(): string {
-        return "tipo de test: $this->tipoTest";
-    }
-
-}
-
-?>
-            
-            
-            
+}   

@@ -1,32 +1,29 @@
 [
     {
-        "id": 1,
-        "titulo": "Implementar login",
-        "descripcion": "Crear formulario de login y backend",
-        "estado": "en_progreso",
-        "prioridad": 2,
-        "fechaCreacion": "2024-09-20",
-        "tipo": "desarrollo",
-        "lenguajeProgramacion": "PHP"
+        "id": "1",
+        "fecha_creacion": "2024-09-27",
+        "tipo": 1,
+        "titulo": "Mi primera entrada",
+        "descripcion": "Esta es mi primera entrada en el blog. \u00a1Estoy emocionado de comenzar esta nueva aventura!"
     },
     {
         "id": 2,
-        "titulo": "Diseñar logo",
-        "descripcion": "Crear logo para la aplicación",
-        "estado": "pendiente",
-        "prioridad": 3,
-        "fechaCreacion": "2024-09-21",
-        "tipo": "diseno",
-        "herramientaDiseno": "Illustrator"
+        "fecha_creacion": "2023-05-02",
+        "tipo": 2,
+        "titulo1": "Receta de la semana",
+        "descripcion1": "Esta semana les traigo una deliciosa receta de pasta al pesto.",
+        "titulo2": "Tip culinario",
+        "descripcion2": "\u00bfSab\u00edas que puedes hacer pesto con diferentes tipos de hojas verdes? Prueba con r\u00facula o espinaca para darle un toque diferente."
     },
     {
         "id": 3,
-        "titulo": "Pruebas de integración",
-        "descripcion": "Realizar pruebas de integración del módulo de usuarios",
-        "estado": "completada",
-        "prioridad": 1,
-        "fechaCreacion": "2024-09-19",
-        "tipo": "testing",
-        "tipoTest": "integracion"
+        "fecha_creacion": "2023-05-03",
+        "tipo": 3,
+        "titulo1": "Tecnolog\u00eda",
+        "descripcion1": "Los \u00faltimos avances en inteligencia artificial est\u00e1n revolucionando la industria.",
+        "titulo2": "Ciencia",
+        "descripcion2": "Cient\u00edficos descubren un nuevo planeta potencialmente habitable en nuestra galaxia.",
+        "titulo3": "Salud",
+        "descripcion3": "Nuevos estudios sugieren que el ejercicio regular puede mejorar la memoria a largo plazo."
     }
 ]

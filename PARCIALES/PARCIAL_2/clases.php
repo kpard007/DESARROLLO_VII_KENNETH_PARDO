@@ -5,18 +5,17 @@ interface Detalles{
 
 }
 
-$archivo = json_decode('tareas.json', true);
-
-function leerTitulo ($archivo){
-    $contenido = file_get_contents($archivo);
-    return json_decode($contenido, true);
-}
 
 class EntradaUnaColumna extends Entrada{
     public $titulo; 
     public $descripcion;
 
     
+    function leerTitulo ($archivo){
+    $contenido = file_get_contents($archivo);
+    return json_decode($contenido, true);
+    }
+
 
     public function obtenerDetallesEspecificos(): string{
         return "Entrada de una columna"; 
@@ -70,7 +69,7 @@ class GestorBlog {
 
     public function cargarEntradas() {
         if (file_exists('tareas.json')) {
-            $json = file_get_contents('blog.json');
+            $json = file_get_contents('tareas.json');
             $data = json_decode($json, true);
             foreach ($data as $entradaData) {
                 $this->entradas[] = new Entrada($entradaData);
@@ -88,4 +87,39 @@ class GestorBlog {
     public function obtenerEntradas() {
         return $this->entradas;
     }
-}   
+
+
+    public function agregarEntrada(Entrada $entrada) {
+        $this->entradas[] = $entrada;
+    }
+
+    public function editarEntrada(Entrada $entrada) {
+        foreach ($this->entradas as $index => $e) {
+            if ($e->id === $entrada->id) {
+                $this->entradas[$index] = $entrada;
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public function eliminarEntrada($id) {
+        foreach ($this->entradas as $index => $entrada) {
+            if ($entrada->id == $id) {
+                unset($this->entradas[$index]);
+                $this->entradas = array_values($this->entradas); 
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public function obtenerEntrada($id) {
+        foreach ($this->entradas as $entrada) {
+            if ($entrada->id == $id) {
+                return $entrada;
+            }
+        }
+        return null;
+    }
+}       

@@ -10,14 +10,18 @@ class EntradaUnaColumna extends Entrada{
     public $titulo; 
     public $descripcion;
 
-    
-    function leerTitulo ($archivo){
-    $contenido = file_get_contents($archivo);
-    return json_decode($contenido, true);
-    }
 
 
     public function obtenerDetallesEspecificos(): string{
+
+        $archivo = 'tareas.json';
+
+        function leerTitulo ($archivo){
+            $contenido = file_get_contents($archivo);
+            return json_decode($contenido, true);
+        }
+        $tituloobtener = leerTitulo($archivo);
+
         return "Entrada de una columna"; 
     } 
 
@@ -28,7 +32,7 @@ class EntradaDosColumna extends Entrada{
     public $descripcion1;
     public $titulo2;
     public $descripcion2;
-
+    
     public function obtenerDetallesEspecificos(): string{
         return "Entrada de dos columnas ";
     }

@@ -11,6 +11,20 @@ function validarEdad($edad) {
     return is_numeric($edad) && $edad >= 18 && $edad <= 120;
 }
 
+function validarFechaNacimiento($fecha) {
+    //checamos que la edad no este vacia 
+    if (empty($fecha) || !strtotime($fecha)) {
+        return false;
+    }
+    
+    $fecha_actual = new DateTime();
+    $fecha_nacimiento = new DateTime($fecha);
+    $diferencia = $fecha_actual->diff($fecha_nacimiento);
+    
+    return $diferencia->y >= 18;
+}
+
+
 function validarSitioWeb($sitioWeb) {
     return empty($sitioWeb) || filter_var($sitioWeb, FILTER_VALIDATE_URL);
 }
@@ -47,4 +61,20 @@ function validarFotoPerfil($archivo) {
 
     return true;
 }
+
+
+if (isset($_FILES['foto_perfil']) && $_FILES['foto_perfil']['error'] === UPLOAD_ERR_OK) {
+    $nombre_original = $_FILES['foto_perfil']['name'];
+    $extension = pathinfo($nombre_original, PATHINFO_EXTENSION);
+    $nombre_unico = uniqid('foto_', true) . '.' . $extension;
+    $ruta_destino = 'uploads/' . $nombre_unico;
+
+    // se mueve el archivo a la carpeta destino
+    if (move_uploaded_file($_FILES['foto_perfil']['tmp_name'], $ruta_destino)) {
+        echo "Foto subida con éxito";
+    } else {
+        echo "Ha ocurrido un error al subir la foto";
+    }
+}
+
 ?>

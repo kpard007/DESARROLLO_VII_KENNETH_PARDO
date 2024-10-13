@@ -8,17 +8,21 @@
 <body>
     <h2>Formulario de Registro Avanzado</h2>
     <form action="procesar.php" method="POST" enctype="multipart/form-data">
+
         <label for="nombre">Nombre:</label>
-        <input type="text" id="nombre" name="nombre" required><br><br>
+        <input type="text" id="nombre" name="nombre" value="<?php echo isset($_POST['nombre']) ? $_POST['nombre'] : ''; ?>" required><br><br>
+
 
         <label for="email">Email:</label>
-        <input type="email" id="email" name="email" required><br><br>
+        <input type="email" id="email" name="email" value="<?php echo isset($_POST['email']) ? $_POST['email'] : ''; ?>" required><br><br>
 
-        <label for="edad">Edad:</label>
-        <input type="number" id="edad" name="edad" required><br><br>
+
+        <label for="fecha_nacimiento">Fecha de nacimiento:</label>
+        <input type="date" id="fecha_nacimiento" name="fecha_nacimiento" value="<?php echo isset($_POST['fecha_nacimiento']) ? $_POST['fecha_nacimiento'] : ''; ?>" required><br><br>
+
 
         <label for="sitio_web">Sitio Web:</label>
-        <input type="url" id="sitio_web" name="sitio_web"><br><br>
+        <input type="url" id="sitio_web" name="sitio_web" value="<?php echo isset($_POST['sitio_web']) ? $_POST['sitio_web'] : ''; ?>"><br><br>
 
         <label for="genero">Género:</label>
         <select id="genero" name="genero">
@@ -43,6 +47,7 @@
 
         <input type="submit" value="Enviar">
         <input type="reset" value="Limpiar">
+        <a href='resumen.php'>Resumen</a>
     </form>
 </body>
 </html>

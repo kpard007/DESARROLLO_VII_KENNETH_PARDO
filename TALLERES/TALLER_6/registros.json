@@ -1,0 +1,16 @@
+[
+    {
+        "nombre": "ken",
+        "email": "kennethpardo3@gmail.com",
+        "fecha_nacimiento": "2002-03-13",
+        "sitio_web": "https:\/\/www.youtube.com\/",
+        "genero": "masculino",
+        "intereses": [
+            "deportes",
+            "musica",
+            "lectura"
+        ],
+        "comentarios": "hola soy peso pluma",
+        "edad": 22
+    }
+]

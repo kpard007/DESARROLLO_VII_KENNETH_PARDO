@@ -2,24 +2,36 @@
 require_once "config_pdo.php";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $id = $_POST['id'];
+    try{
 
-    $sql = "DELETE FROM usuarios WHERE id = :id";
+        $id = $_POST['id'];
 
-    if ($stmt = $pdo->prepare($sql)) {
+        $sql = "DELETE FROM usuarios WHERE id = :id";
+
+        $stmt = $pdo->prepare($sql);
         $stmt->bindParam(":id", $id, PDO::PARAM_INT);
 
+
         if ($stmt->execute()) {
-            echo "Usuario eliminado con éxito.";
-        } else {
-            echo "ERROR: No se pudo ejecutar $sql. " . $stmt->errorInfo()[2];
+            throw new Exception ("Error en la consulta: " . $stmt->errorInfo()[2]);
         }
+        echo "Usuario eliminado con éxito";
+    } catch (Exception $e){
+        logError($e->getMessage());
+        echo "Ocurrio un error: " . $e->getMessage();
+    } finally{
+        unset($stmt);
+        unset($pdo);
     }
 
-    unset($stmt);
 }
+function logError($message){
+    $archivo ='error_log.txt';
+    $actual = "[" . date("Y-m-d H:i:s") . "]" . $message . PHP_EOL;
+    file_put_contents($archivo, $actual, FILE_APPEND);
 
-unset($pdo);
+}
+    
 ?>
 
 <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">

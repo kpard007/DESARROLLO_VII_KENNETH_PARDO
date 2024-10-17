@@ -3,10 +3,13 @@
 <?php
 require_once "config_mysqli.php";
 
+try {
 $sql = "SELECT id, nombre, email, fecha_registro FROM usuarios";
 $result = mysqli_query($conn, $sql);
 
-if($result){
+if(!$result){
+throw new Exception ("Error en la consulta " . mysqli_error($conn));
+}
     if(mysqli_num_rows($result) > 0){
         echo "<table>";
             echo "<tr>";
@@ -28,9 +31,16 @@ if($result){
     } else{
         echo "No se encontraron registros.";
     }
-} else{
-    echo "ERROR: No se pudo ejecutar $sql. " . mysqli_error($conn);
+}catch (Exception $e){
+    logError($e->getMessage());
+    echo "Ocurrio un error: " . $e->getMessage();
+} finally {
+    mysqli_close($conn);
 }
 
-mysqli_close($conn);
+function logError($mensaje){
+    $archivo ='error_log.txt';
+    $actual = "[" . date("Y-m-d H:i:s") . "]" .$mensaje . PHP_EOL;
+    file_put_contents($archivo, $actual, FILE_APPEND);
+}
 ?>

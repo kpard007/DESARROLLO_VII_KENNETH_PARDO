@@ -1,0 +1,15 @@
+# Ignorar el archivo de configuración con las credenciales
+config.php
+
+# Ignorar otros archivos sensibles (si es necesario)
+*.env
+
+# Ignorar archivos y directorios del sistema
+.DS_Store
+Thumbs.db
+
+# Ignorar archivos generados por el entorno de desarrollo (si corresponde)
+*.log
+*.cache
+vendor/
+node_modules/

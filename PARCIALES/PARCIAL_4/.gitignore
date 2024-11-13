@@ -1,7 +1,7 @@
 # Ignorar el archivo de configuración con las credenciales
 config.php
 
-# Ignorar otros archivos sensibles (si es necesario)
+# Ignorar otros archivos sensibles 
 *.env
 
 # Ignorar archivos y directorios del sistema

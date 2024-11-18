@@ -85,6 +85,54 @@ class GitHubClient {
         
         return json_decode($response, true);
     }
+
+     // Metodo put
+     public function put($endpoint) {
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $this->baseUrl . $endpoint);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'PUT');
+        curl_setopt($ch, CURLOPT_HTTPHEADER, $this->getHeaders());
+        
+        $response = curl_exec($ch);
+        $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+        
+        if (curl_errno($ch)) {
+            throw new Exception('Error en la petición cURL: ' . curl_error($ch));
+        }
+        
+        curl_close($ch);
+        
+        if ($httpCode >= 400) {
+            throw new Exception('Error en la API de GitHub: ' . $response);
+        }
+        
+        return json_decode($response, true);
+    }
+
+    // metodo DELETE
+    public function delete($endpoint) {
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $this->baseUrl . $endpoint);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'DELETE');
+        curl_setopt($ch, CURLOPT_HTTPHEADER, $this->getHeaders());
+        
+        $response = curl_exec($ch);
+        $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+        
+        if (curl_errno($ch)) {
+            throw new Exception('Error en la petición cURL: ' . curl_error($ch));
+        }
+        
+        curl_close($ch);
+        
+        if ($httpCode >= 400) {
+            throw new Exception('Error en la API de GitHub: ' . $response);
+        }
+        
+        return json_decode($response, true);
+    }
 }
 
 // Crear instancia del cliente
